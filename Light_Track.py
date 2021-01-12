@@ -5,6 +5,7 @@ import subprocess
 b = Bridge('127.0.0.1')
 BT_ID = "00:11:22:33:FF:EE" 
 ON = False
+
 connect = subprocess.check_output(["rfcomm", "connect", "0", BT_ID, "10", ">/dev/null &"])
 
 while True:
@@ -16,18 +17,16 @@ while True:
     statusOUT = statusOUT.replace(':', '')
     statusOUT = statusOUT.replace('\\n', '')
     #print(statusOUT)
-    #Arrived Turn Lights On 
+    
     if int(statusOUT) > -5 and ON == False:
         ON = True
-        #time.sleep(4)
         b.set_light(3, 'on', True)
         b.set_light(2, 'on', True)
         b.set_light(1, 'on', True)
         time.sleep(4)
-    #Left Turn Lights Off
+    
     elif int(statusOUT) < -4 and ON == True: 
         ON = False
-        #time.sleep(3)
         b.set_light(3, 'on', False)
         b.set_light(2, 'on', False)
         b.set_light(1, 'on', False)
