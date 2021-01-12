@@ -2,7 +2,7 @@ from phue import Bridge
 import time
 import subprocess
 
-b = Bridge('10.0.0.2')
+b = Bridge('127.0.0.1')
 ON = False
 connect = subprocess.check_output(["rfcomm", "connect", "0", "CC:2D:B7:B8:F6:DB", "10", ">/dev/null &"])
 
