@@ -3,11 +3,12 @@ import time
 import subprocess
 
 b = Bridge('127.0.0.1')
+BT_ID = "00:11:22:33:FF:EE" 
 ON = False
-connect = subprocess.check_output(["rfcomm", "connect", "0", "CC:2D:B7:B8:F6:DB", "10", ">/dev/null &"])
+connect = subprocess.check_output(["rfcomm", "connect", "0", BT_ID, "10", ">/dev/null &"])
 
 while True:
-    status = subprocess.check_output(["hcitool", "rssi", "CC:2D:B7:B8:F6:DB"])
+    status = subprocess.check_output(["hcitool", "rssi", BT_ID])
     statusOUT = str(status)
     statusOUT = statusOUT.replace('RSSI return value', '')
     statusOUT = statusOUT.replace("b'", '')
